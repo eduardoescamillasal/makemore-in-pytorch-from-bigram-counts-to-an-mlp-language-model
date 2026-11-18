@@ -12,7 +12,7 @@ python scaffold.py
 
 - [x] **1.** load_names
 - [x] **2.** build_vocab
-- [ ] **3.** bigram_counts
+- [x] **3.** bigram_counts
 - [ ] **4.** bigram_probs
 - [ ] **5.** sample_bigram
 - [ ] **6.** bigram_nll

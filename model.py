@@ -33,8 +33,22 @@ def build_vocab(words):
     itos = {i: ch for ch, i in stoi.items()}
     return stoi, itos
 
-# Step 3 - bigram_counts (not yet solved)
-# TODO: implement
+# Step 3 - bigram_counts
+import torch
+
+def bigram_counts(words, stoi):
+    """(V, V) int32 tensor of bigram counts, with '.' around every word."""
+    V = len(stoi)
+    N = torch.zeros((V,V), dtype=torch.int32)
+
+    for word in words:
+        chs = ['.'] + list(word) + ['.']
+        for ch1, ch2 in zip(chs, chs[1:]):
+            ix1 = stoi[ch1]
+            ix2 = stoi[ch2]
+            N[ix1, ix2] += 1
+
+    return N
 
 # Step 4 - bigram_probs (not yet solved)
 # TODO: implement
