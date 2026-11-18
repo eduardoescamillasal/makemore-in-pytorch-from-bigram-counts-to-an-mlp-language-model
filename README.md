@@ -17,7 +17,7 @@ python scaffold.py
 - [x] **5.** sample_bigram
 - [x] **6.** bigram_nll
 - [x] **7.** bigram_dataset
-- [ ] **8.** train_neural_bigram
+- [x] **8.** train_neural_bigram
 - [ ] **9.** build_context_dataset
 - [ ] **10.** split_words
 - [ ] **11.** MLP

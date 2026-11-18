@@ -104,8 +104,30 @@ def bigram_dataset(words, stoi):
             ys.append(ix2)
     return torch.tensor(xs), torch.tensor(ys)
 
-# Step 8 - train_neural_bigram (not yet solved)
-# TODO: implement
+# Step 8 - train_neural_bigram
+import torch
+import torch.nn.functional as F
+
+def train_neural_bigram(xs, ys, vocab_size, steps, lr, reg, seed):
+    """Full-batch gradient descent on one linear layer; returns (W, losses)."""
+    g = torch.Generator().manual_seed(seed)
+    W = torch.randn((vocab_size, vocab_size), generator=g, requires_grad=True)
+    xenc = F.one_hot(xs, num_classes=vocab_size).float()
+    num = len(ys)
+    losses = []
+    for _ in range(steps):
+        logits = xenc @ W
+        counts = logits.exp()
+        probs = counts / counts.sum(dim=1, keepdims=True)
+        loss = -probs[torch.arange(num), ys].log().mean()
+        losses.append(loss.item())
+
+        W.grad = None
+        loss.backward()
+
+        W.data += -lr * W.grad
+
+    return W, losses
 
 # Step 9 - build_context_dataset (not yet solved)
 # TODO: implement
