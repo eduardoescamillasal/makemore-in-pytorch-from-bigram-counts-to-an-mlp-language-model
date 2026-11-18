@@ -119,7 +119,7 @@ def train_neural_bigram(xs, ys, vocab_size, steps, lr, reg, seed):
         logits = xenc @ W
         counts = logits.exp()
         probs = counts / counts.sum(dim=1, keepdims=True)
-        loss = -probs[torch.arange(num), ys].log().mean()
+        loss = -probs[torch.arange(num), ys].log().mean() + reg*(W**2).mean()
         losses.append(loss.item())
 
         W.grad = None
