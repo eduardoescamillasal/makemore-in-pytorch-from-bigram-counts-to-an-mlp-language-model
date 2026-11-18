@@ -57,8 +57,24 @@ def bigram_probs(N, smoothing=1):
     p = p / p.sum(dim=1, keepdim=True)
     return p
 
-# Step 5 - sample_bigram (not yet solved)
-# TODO: implement
+# Step 5 - sample_bigram
+import torch
+
+def sample_bigram(P, itos, n, seed):
+    """Sample n names, one generator seeded with `seed` for every draw."""
+    g = torch.Generator().manual_seed(seed)
+    names = []
+    for _ in range(n):
+        out = []
+        ix = 0
+        while True:
+            p = P[ix]
+            ix = torch.multinomial(p, num_samples=1, replacement=True, generator=g).item()
+            if ix == 0:
+                break
+            out.append(itos[ix])
+        names.append("".join(out))
+    return names
 
 # Step 6 - bigram_nll (not yet solved)
 # TODO: implement
