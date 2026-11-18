@@ -24,8 +24,14 @@ def load_names():
 
     return words
 
-# Step 2 - build_vocab (not yet solved)
-# TODO: implement
+# Step 2 - build_vocab
+def build_vocab(words):
+    """Return (stoi, itos): '.' -> 0, the sorted characters -> 1, 2, ..."""
+    chars = sorted(set("".join(words)))
+    stoi = {ch: i for i, ch in enumerate(chars, start=1)}
+    stoi["."] = 0
+    itos = {i: ch for ch, i in stoi.items()}
+    return stoi, itos
 
 # Step 3 - bigram_counts (not yet solved)
 # TODO: implement

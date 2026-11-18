@@ -11,7 +11,7 @@ python scaffold.py
 ## Steps
 
 - [x] **1.** load_names
-- [ ] **2.** build_vocab
+- [x] **2.** build_vocab
 - [ ] **3.** bigram_counts
 - [ ] **4.** bigram_probs
 - [ ] **5.** sample_bigram
