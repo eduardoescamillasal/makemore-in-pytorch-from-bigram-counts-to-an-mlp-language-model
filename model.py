@@ -50,8 +50,12 @@ def bigram_counts(words, stoi):
 
     return N
 
-# Step 4 - bigram_probs (not yet solved)
-# TODO: implement
+# Step 4 - bigram_probs
+def bigram_probs(N, smoothing=1):
+    """Row-normalized float probabilities after adding `smoothing` to every count."""
+    p = (N + smoothing).float()
+    p = p / p.sum(dim=1, keepdim=True)
+    return p
 
 # Step 5 - sample_bigram (not yet solved)
 # TODO: implement
