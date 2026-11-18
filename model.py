@@ -89,8 +89,20 @@ def bigram_nll(P, words, stoi):
             ys.append(stoi[ch2])
     return (-torch.log(P[xs, ys]).mean()).item()
 
-# Step 7 - bigram_dataset (not yet solved)
-# TODO: implement
+# Step 7 - bigram_dataset
+import torch
+
+def bigram_dataset(words, stoi):
+    """Return (xs, ys): input and next-token ids for every bigram, as long tensors."""
+    xs, ys = [], []
+    for w in words:
+        chs = ['.'] + list(w) + ['.']
+        for ch1, ch2 in zip(chs, chs[1:]):
+            ix1 = stoi[ch1]
+            ix2 = stoi[ch2]
+            xs.append(ix1)
+            ys.append(ix2)
+    return torch.tensor(xs), torch.tensor(ys)
 
 # Step 8 - train_neural_bigram (not yet solved)
 # TODO: implement
