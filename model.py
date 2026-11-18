@@ -76,8 +76,18 @@ def sample_bigram(P, itos, n, seed):
         names.append("".join(out))
     return names
 
-# Step 6 - bigram_nll (not yet solved)
-# TODO: implement
+# Step 6 - bigram_nll
+import torch
+
+def bigram_nll(P, words, stoi):
+    """Average negative log-likelihood per bigram, as a float."""
+    xs, ys = [], []
+    for w in words:
+        chs = ['.'] + list(w) + ['.']
+        for ch1, ch2 in zip(chs, chs[1:]):
+            xs.append(stoi[ch1])
+            ys.append(stoi[ch2])
+    return (-torch.log(P[xs, ys]).mean()).item()
 
 # Step 7 - bigram_dataset (not yet solved)
 # TODO: implement
